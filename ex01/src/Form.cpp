@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Form.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sasano <shunkotkg0141@gmail.com>           +#+  +:+       +#+        */
+/*   By: sasano <sasano@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 02:52:48 by sasano            #+#    #+#             */
-/*   Updated: 2025/01/26 03:47:37 by sasano           ###   ########.fr       */
+/*   Updated: 2025/10/30 14:36:23 by sasano           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,17 +80,17 @@ void Form::beSigned(const Bureaucrat &bureaucrat)
     }
 }
 
-const char *Form::GradeTooHighException::what() const _NOEXCEPT
+const char *Form::GradeTooHighException::what() const throw()
 {
     return ("Grade is too high");
 }
 
-const char *Form::GradeTooLowException::what() const _NOEXCEPT
+const char *Form::GradeTooLowException::what() const throw()
 {
     return ("Grade is too low");
 }
 
-const char *Form::FormAlreadySignedException::what() const _NOEXCEPT
+const char *Form::FormAlreadySignedException::what() const throw()
 {
     return ("Form is already signed");
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   RobotomyRequestForm.cpp                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sasano <shunkotkg0141@gmail.com>           +#+  +:+       +#+        */
+/*   By: sasano <sasano@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 04:47:00 by sasano            #+#    #+#             */
-/*   Updated: 2025/01/26 04:47:41 by sasano           ###   ########.fr       */
+/*   Updated: 2025/10/30 16:42:33 by sasano           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,17 @@ RobotomyRequestForm::~RobotomyRequestForm()
 
 void RobotomyRequestForm::execute(Bureaucrat const &executor) const
 {
+    if (this->getSigned() == false)
+        throw AForm::AFormNotSignedException();
     if (executor.getGrade() > this->getGradeToExecute())
         throw AForm::GradeTooLowException();
     std::cout << "*drilling noises*" << std::endl;
+    std::srand(time(NULL));
     if (rand() % 2)
         std::cout << this->_target << " has been robotomized successfully" << std::endl;
     else
         std::cout << this->_target << " has failed to be robotomized" << std::endl;
-}
+
+    std::cout << executor.getName() << " executed " << this->getName() << std::endl;
+    }
+

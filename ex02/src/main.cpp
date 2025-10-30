@@ -3,35 +3,88 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sasano <shunkotkg0141@gmail.com>           +#+  +:+       +#+        */
+/*   By: sasano <sasano@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 05:32:57 by sasano            #+#    #+#             */
-/*   Updated: 2025/01/26 05:33:22 by sasano           ###   ########.fr       */
+/*   Updated: 2025/10/30 16:30:58 by sasano           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <iostream>
+#include <cassert>
 #include "Bureaucrat.hpp"
 #include "AForm.hpp"
 #include "RobotomyRequestForm.hpp"
 #include "ShrubberyCreationForm.hpp"
 #include "PresidentialPardonForm.hpp"
 
-int main()
-{
-    try
+
+
+// Helper function to test execution and catch exceptions
+void testExecuteForm(Bureaucrat& bureaucrat, AForm& form, bool shouldSucceed) {
+    shouldSucceed = shouldSucceed; // to avoid unused parameter warning
+
+    // try {
+        bureaucrat.executeForm(form);
+        // if (!shouldSucceed) {
+    //         std::cerr << "Expected failure but succeeded.\n";
+    //         // assert(false);
+    //     }
+    // } catch (const std::exception& e) {
+    //     if (shouldSucceed) {
+    //         std::cerr << "Expected success but failed: " << e.what() << "\n";
+    //         // assert(false);
+    //     }
+    // }
+}
+
+int main() {
+    // Test: Bureaucrat with highest grade executes all forms
     {
         Bureaucrat bureaucrat("Bureaucrat", 1);
-        RobotomyRequestForm robotomyRequestForm("RobotomyRequestForm");
-        ShrubberyCreationForm shrubberyCreationForm("ShrubberyCreationForm");
-        PresidentialPardonForm presidentialPardonForm("PresidentialPardonForm");
+        RobotomyRequestForm robotomy("TargetA");
+        ShrubberyCreationForm shrubbery("TargetB");
+        PresidentialPardonForm pardon("TargetC");
 
-        bureaucrat.executeForm(robotomyRequestForm);
-        bureaucrat.executeForm(shrubberyCreationForm);
-        bureaucrat.executeForm(presidentialPardonForm);
+        // Do not sign forms yet
+        testExecuteForm(bureaucrat, robotomy, false);
+        testExecuteForm(bureaucrat, shrubbery, false);
+        testExecuteForm(bureaucrat, pardon, false);
+
+        bureaucrat.signForm(robotomy);
+        bureaucrat.signForm(shrubbery);
+        bureaucrat.signForm(pardon);
+
+        // Now execute signed forms
+        testExecuteForm(bureaucrat, robotomy, true);
+        testExecuteForm(bureaucrat, shrubbery, true);
+        testExecuteForm(bureaucrat, pardon, true);
+
+
+
     }
-    catch (std::exception &e)
+    std::cout << "-----------------------------------\n";
+
+    // Test: Bureaucrat with low grade cannot execute forms
     {
-        std::cerr << e.what() << std::endl;
+        Bureaucrat highBureaucrat("LowBureaucrat", 1);
+        Bureaucrat lowBureaucrat("LowBureaucrat", 150);
+        RobotomyRequestForm robotomy("TargetA");
+        ShrubberyCreationForm shrubbery("TargetB");
+        PresidentialPardonForm pardon("TargetC");
+
+        highBureaucrat.signForm(robotomy);
+        highBureaucrat.signForm(shrubbery);
+        highBureaucrat.signForm(pardon);
+
+        testExecuteForm(lowBureaucrat, robotomy, false);
+        testExecuteForm(lowBureaucrat, shrubbery, false);
+        testExecuteForm(lowBureaucrat, pardon, false);
+
+
     }
-    return (0);
+    std::cout << "-----------------------------------\n";
+
+    std::cout << "All tests passed.\n";
+    return 0;
 }

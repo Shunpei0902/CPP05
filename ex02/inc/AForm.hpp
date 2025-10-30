@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   AForm.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sasano <shunkotkg0141@gmail.com>           +#+  +:+       +#+        */
+/*   By: sasano <sasano@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 02:52:56 by sasano            #+#    #+#             */
-/*   Updated: 2025/01/26 05:30:47 by sasano           ###   ########.fr       */
+/*   Updated: 2025/10/30 16:11:45 by sasano           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,22 +42,27 @@ class AForm
         class GradeTooHighException : public std::exception
         {
             public:
-                const char *what() const _NOEXCEPT;
+                const char *what() const throw();
         };
         class GradeTooLowException : public std::exception
         {
             public:
-                const char *what() const _NOEXCEPT;
+                const char *what() const throw();
         };
         class AFormAlreadySignedException : public std::exception
         {
             public:
-                const char *what() const _NOEXCEPT;
+                const char *what() const throw();
+        };
+        class AFormNotSignedException : public std::exception
+        {
+            public:
+                const char *what() const throw();
         };
         class FileNotOpenException : public std::exception
         {
             public:
-                const char *what() const _NOEXCEPT;
+                const char *what() const throw();
         };
         
 };

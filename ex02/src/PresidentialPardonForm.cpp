@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   PresidentialPardonForm.cpp                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sasano <shunkotkg0141@gmail.com>           +#+  +:+       +#+        */
+/*   By: sasano <sasano@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 04:48:07 by sasano            #+#    #+#             */
-/*   Updated: 2025/01/26 05:18:49 by sasano           ###   ########.fr       */
+/*   Updated: 2025/10/30 16:17:32 by sasano           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,10 @@ PresidentialPardonForm::~PresidentialPardonForm()
 
 void PresidentialPardonForm::execute(Bureaucrat const &executor) const
 {
+    if (this->getSigned() == false)
+        throw AForm::AFormNotSignedException();
     if (executor.getGrade() > this->getGradeToExecute())
         throw AForm::GradeTooLowException();
     std::cout << this->_target << " has been pardoned by Zafod Beeblebrox" << std::endl;
+    std::cout << executor.getName() << " executed " << this->getName() << std::endl;
 }

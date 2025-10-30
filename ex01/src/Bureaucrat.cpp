@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Bureaucrat.cpp                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sasano <shunkotkg0141@gmail.com>           +#+  +:+       +#+        */
+/*   By: sasano <sasano@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 22:51:08 by sasano            #+#    #+#             */
-/*   Updated: 2025/01/26 03:44:20 by sasano           ###   ########.fr       */
+/*   Updated: 2025/10/30 14:35:29 by sasano           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,12 +84,12 @@ void Bureaucrat::signForm(Form &form) const
     }
 }
 
-const char *Bureaucrat::GradeTooHighException::what() const _NOEXCEPT   
+const char *Bureaucrat::GradeTooHighException::what() const throw()   
 {
     return ("Grade is too high");
 }
 
-const char *Bureaucrat::GradeTooLowException::what() const _NOEXCEPT
+const char *Bureaucrat::GradeTooLowException::what() const throw()
 {
     return ("Grade is too low");
 }

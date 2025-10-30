@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   AForm.cpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sasano <shunkotkg0141@gmail.com>           +#+  +:+       +#+        */
+/*   By: sasano <sasano@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 02:52:48 by sasano            #+#    #+#             */
-/*   Updated: 2025/01/26 05:11:18 by sasano           ###   ########.fr       */
+/*   Updated: 2025/10/30 16:17:10 by sasano           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,22 +79,27 @@ void AForm::beSigned(const Bureaucrat &bureaucrat)
     }
 }
 
-const char *AForm::GradeTooHighException::what() const _NOEXCEPT
+const char *AForm::GradeTooHighException::what() const throw()
 {
     return ("Grade is too high");
 }
 
-const char *AForm::GradeTooLowException::what() const _NOEXCEPT
+const char *AForm::GradeTooLowException::what() const throw()
 {
     return ("Grade is too low");
 }
 
-const char *AForm::AFormAlreadySignedException::what() const _NOEXCEPT
+const char *AForm::AFormAlreadySignedException::what() const throw()
 {
-    return ("AForm is already signed");
+    return ("Form is already signed");
 }
 
-const char *AForm::FileNotOpenException::what() const _NOEXCEPT
+const char *AForm::AFormNotSignedException::what() const throw()
+{
+    return ("Form is not signed");
+}
+
+const char *AForm::FileNotOpenException::what() const throw()
 {
     return ("File couldn't be opened");
 }

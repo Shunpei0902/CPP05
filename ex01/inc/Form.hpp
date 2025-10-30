@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Form.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sasano <shunkotkg0141@gmail.com>           +#+  +:+       +#+        */
+/*   By: sasano <sasano@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 02:52:56 by sasano            #+#    #+#             */
-/*   Updated: 2025/01/26 03:47:42 by sasano           ###   ########.fr       */
+/*   Updated: 2025/10/30 14:45:29 by sasano           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <iostream>
 # include <string>
 # include "Bureaucrat.hpp"
+# include <iosfwd>
 
 class Bureaucrat;
 
@@ -43,19 +44,19 @@ class Form
         class GradeTooHighException : public std::exception
         {
             public:
-                const char *what() const _NOEXCEPT;
+                const char *what() const throw();
         };
         class GradeTooLowException : public std::exception
         {
             public:
-                const char *what() const _NOEXCEPT;
+                const char *what() const throw();
         };
         class FormAlreadySignedException : public std::exception
         {
             public:
-                const char *what() const _NOEXCEPT;
+                const char *what() const throw();
         };
         
 };
-
+std::ostream &operator<<(std::ostream &out, Form const &form);
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ShrubberyCreationForm.cpp                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sasano <shunkotkg0141@gmail.com>           +#+  +:+       +#+        */
+/*   By: sasano <sasano@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 04:30:48 by sasano            #+#    #+#             */
-/*   Updated: 2025/01/26 04:57:57 by sasano           ###   ########.fr       */
+/*   Updated: 2025/10/30 16:59:53 by sasano           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,11 @@ ShrubberyCreationForm::~ShrubberyCreationForm()
 
 void ShrubberyCreationForm::execute(Bureaucrat const &executor) const
 {
+    if (this->getSigned() == false)
+        throw AForm::AFormNotSignedException();
     if (executor.getGrade() > this->getGradeToExecute())
         throw AForm::GradeTooLowException();
-    std::ofstream file(this->_target + "_shrubbery");
+    std::ofstream file((this->_target + "_shrubbery").c_str());
     if (!file.is_open())
         throw AForm::FileNotOpenException();
     file << "      *           *           *           *" << std::endl;
@@ -55,8 +57,9 @@ void ShrubberyCreationForm::execute(Bureaucrat const &executor) const
 	file << "   *******     *******     *******     *******" << std::endl;
 	file << "  *********   *********   *********   *********" << std::endl;
 	file << " *********** *********** *********** ***********" << std::endl;
-	file << "    |            |            |            |" << std::endl;
+	file << "      |           |           |            |" << std::endl;
 
     // std::ofstream のスコープを抜けると自動的に閉じられる
     // file.close();
+    std::cout << executor.getName() << " executed " << this->getName() << std::endl;
 }
